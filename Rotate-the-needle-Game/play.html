@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .play{
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            top:0;
+            user-select: none;
+            left: 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="play">
+    <h1>游戏玩法</h1>
+    <p>
+        点击有色区域 <br/>
+        必须把所有的针头都插进旋转的球里头。<br/>
+        不能够重叠也不能够撞到球上的针
+    </p>
+</div>
+    <div class="box" style="width: 600px;height: 600px;background-color:blanchedalmond; margin:0 auto">
+        <div class="cBox">
+            <canvas class="canvas" width="600" height="600px"></canvas>
+        </div>
+
+    </div>
+</body>
+<script src="js/play.js"></script>
+</html>

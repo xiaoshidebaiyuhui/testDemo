@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rotating needle</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: url("img/943564.jpg");
+        }
+
+        .box {
+            margin: 200px auto;
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            padding: 10px;
+            font-size: 60px;
+        }
+
+        h2 {
+            margin-top: 10px;
+            text-align: center;
+            color: gainsboro;
+        }
+
+        .aHref {
+            color: #fad65c;
+            text-decoration: none;
+        }
+
+        .aHref:hover {
+            color: #AB8228;
+        }
+
+        .res {
+            text-decoration: none;
+            color: burlywood;
+            font-size: 30px;
+            text-align: center;
+            margin-top: 30px;
+            display: block;
+            border: 1px solid darkgoldenrod;
+            border-radius: 6px;
+            background-color: beige;
+        }
+
+        .res:hover {
+            color: #B08F3E;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1><a href="play.html" class="aHref">点击开始游戏</a></h1>
+
+    <h2>关卡<span class="level">1</span></h2>
+
+    <a href="index.html" class="res">重新开始游戏</a>
+
+</div>
+</body>
+<script>
+    //    window.location.href 当前页面的地址
+    var aHref = document.querySelector('.aHref');
+    var leavl = parseInt(window.location.href.split('#')[1]);
+    if (leavl) {
+        if (leavl == 14) {
+            leavl = 0;
+        }
+        else if (leavl > 0) {
+            aHref.innerText = '继续游戏';
+        }
+        document.querySelector('.level').innerHTML = leavl + 1;
+        aHref.setAttribute('href', 'play.html#' + leavl);
+
+    }
+    document.querySelector('.res').onclick = function () {
+        leavl = 1;
+    };
+</script>
+</html>
