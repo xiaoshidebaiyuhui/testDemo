@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000;
+        }
+
+        .rect {
+            width: 80px;
+            height: 20px;
+            border: 1px solid red;
+            line-height: 20px;
+            text-align: center;
+            float: left;
+            margin: 5px 5px;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        #container {
+            width: 460px;
+            margin: 150px auto 10px;
+            border: 1px dashed blue;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        #button {
+            width: 300px;
+            height: 30px;
+            border: 1px solid green;
+            border-radius: 5px;
+            color: #fff;
+            background-color: green;
+            font-size: 14px;
+            line-height: 30px;
+            text-align: center;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+
+        #button:active {
+            background-color: lightgreen;
+        }
+
+        .select {
+            background: yellow;
+            color: #000;
+        }
+    </style>
+    <script id="data">
+        /*
+         庞志巍 李澳顺 张敏 蔡鸿城 张健 刘炬 王林 李显良 胡文浩 颜丽 杨靖朗 周晗星 谢波 陈嘉德 陈强 胡斐 杨全新 孙添锦 樊海花 彭富春 陶元阳 王正中
+         */
+    </script>
+    <script>
+        var Student = {
+            //获取类
+            id: function (idName) {
+                return document.getElementById(idName);
+            },
+            //获取数据
+            getData: function (idName) {
+                var node = this.id(idName), txt;//定义节点和文本
+                txt = node.innerHTML
+                        .replace(/\/\*|\*\//g, "")   //清除注释符号
+                        .replace(/\s+/g, " ")  //将所有的空格变成一个空格
+                        .trim();    //删除首尾空格
+                node.parentNode.removeChild(node);      //删除script标签
+                return txt.split(' '); //利用空格分割字符串，返回数组
+            },
+            cFrag: function () {
+                return document.createDocumentFragment(); //样板节点 创建容器
+            },
+            cElem: function (name) {
+                return document.createElement(name); //创建节点
+            }
+        };
+        onload = function () {
+            //添加数据
+            var list = Student.getData('data'),
+                    docfrag = Student.cFrag(),  //创建div 将所有的div放到容器内，再将容器统一添加到页面中
+                    nodes = [], i,
+                    clearNode;
+            for (var i = 0; i < list.length; i++) {
+                var div = Student.cElem('div'); //创建div
+                div.innerHTML = list[i];    //设置div内容
+                div.className = 'rect';//设置div样式
+                docfrag.appendChild(div);   //将div放到容器内
+                nodes.push(div);
+            }
+
+            Student.id('container').appendChild(docfrag);   //将容器添加到页面上
+            clearNode = Student.cElem('div');//创建一个空div用于清除浮动
+            clearNode.className = 'clear';
+            Student.id('container').appendChild(clearNode);
+
+            //绑定计时器
+            var start = false,
+                    interval,
+                    select;
+            Student.id('button').onclick = function () {
+                if (start) {//查找
+                    clearInterval(interval);
+                    this.innerHTML = '点 击';
+                } else {
+                    interval = setInterval(function () {
+                        if (select) select.className = 'rect';
+                        var i = parseInt(Math.random() * 1000) % list.length;
+                        select = nodes[i];
+                        select.className += ' select';//随机设置样式
+                    }, 5);
+                    this.innerHTML = '停止';
+                }
+                start = !start;
+            };
+        };
+    </script>
+</head>
+<body>
+<div id="container">
+
+</div>
+<div id="button">点击</div>
+</body>
+</html>
